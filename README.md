@@ -1,9 +1,7 @@
 # Test Poker Dkatalis - Achmad Jamaludin
 
 [![TypeScript version][ts-badge]][typescript-4-9]
-[![Node.js version][nodejs-badge]][nodejs-18]
-
-👩🏻‍💻 Developer Ready: A comprehensive template. Works out of the box for most [Node.js][nodejs] projects.
+[![Node.js version][nodejs-badge]][nodejs]
 
 🏃🏽 Instant Value: All basic tools included and configured:
 
@@ -49,3 +47,14 @@ example
 ```sh
 npm run start 5
 ```
+
+[ts-badge]: https://img.shields.io/badge/TypeScript-4.8-blue.svg
+[nodejs-badge]: https://img.shields.io/badge/Node.js->=%2016.13-blue.svg
+[nodejs]: https://nodejs.org/dist/latest-v18.x/docs/api/
+[typescript]: https://www.typescriptlang.org/
+[typescript-4-9]: https://devblogs.microsoft.com/typescript/announcing-typescript-4-9/
+[jest]: https://facebook.github.io/jest/
+[eslint]: https://github.com/eslint/eslint
+[wiki-js-tests]: https://github.com/jsynowiec/node-typescript-boilerplate/wiki/Unit-tests-in-plain-JavaScript
+[prettier]: https://prettier.io
+[esm]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
