@@ -16,6 +16,10 @@ export class StraightFlush extends PlayerHand implements IPlayerHandExt {
         this.restCards = cards
     }
 
+    public greaterThan(data: IPlayerHandExt): boolean{
+        return PlayerHand.greaterThan(this as IPlayerHandExt, data)
+    }
+
     public solve() : IPlayerHandExt | null {
         const checkingStepResults: (IPlayerHandExt | null)[] = []
         for (let i = 0; i < this.steps.length; i++) {
@@ -34,6 +38,5 @@ export class StraightFlush extends PlayerHand implements IPlayerHandExt {
         if(!checkingStepResults.includes(null)) return (this as StraightFlush)
 
         return checkingStepResults[0] || checkingStepResults[1]
-        // return checkingStepResults
     }
 }

@@ -14,6 +14,10 @@ export class FourOfAKind extends PlayerHand implements IPlayerHandExt {
         this.restCards = cards
     }
 
+    public greaterThan(data: IPlayerHandExt): boolean{
+        return PlayerHand.greaterThan(this as IPlayerHandExt, data)
+    }
+
     public solve(checkingStepResultsBefore?: IPlayerHandExt) : IPlayerHandExt | null {
         const threeOfAKindCheck = checkingStepResultsBefore || new ThreeOfAKind(this.cards).check()
         if(threeOfAKindCheck){
@@ -27,12 +31,4 @@ export class FourOfAKind extends PlayerHand implements IPlayerHandExt {
         }
         return null
     }
-
-    // public solve(checkingStepResultsBefore?: IPlayerHandExt) : IPlayerHandExt | null {
-    //     return this.check()
-    //     // const checkingStepResults: (IPlayerHandExt | null)[] = []
-    //     // checkingStepResults[0] = this.check()
-
-    //     // return checkingStepResults
-    // }
 }

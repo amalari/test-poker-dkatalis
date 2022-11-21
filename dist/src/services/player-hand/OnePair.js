@@ -11,6 +11,9 @@ class OnePair extends PlayerHand_1.PlayerHand {
         this.suit = '';
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     check() {
         let result = false;
         const pairIndexs = [];
@@ -23,7 +26,8 @@ class OnePair extends PlayerHand_1.PlayerHand {
                 pairIndexs.push(i);
                 pairIndexs.push(foundDuplicateRankIndex);
                 this.rank = cardRanks[i];
-                this.suit = this.cards[i].suit;
+                this.suit = constants_1.RANK_SUITS.indexOf(this.cards[i].suit) > constants_1.RANK_SUITS.indexOf(this.cards[foundDuplicateRankIndex].suit)
+                    ? this.cards[i].suit : this.cards[foundDuplicateRankIndex].suit;
                 i = cardRanks.length;
                 result = true;
                 this.restCards = this.cards.filter((card, index) => !pairIndexs.includes(index));
@@ -33,9 +37,6 @@ class OnePair extends PlayerHand_1.PlayerHand {
     }
     solve() {
         return this.check();
-        // const checkingStepResults: (IPlayerHandExt | null)[] = []
-        // checkingStepResults[0] = this.check()
-        // return checkingStepResults
     }
 }
 exports.OnePair = OnePair;

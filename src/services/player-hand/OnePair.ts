@@ -1,4 +1,4 @@
-import { PLAYER_RANK } from "../../constants";
+import { PLAYER_RANK, RANK_SUITS } from "../../constants";
 import { Card } from "../../models";
 import { PlayerHand, IPlayerHandExt } from "./PlayerHand";
 
@@ -11,6 +11,10 @@ export class OnePair extends PlayerHand implements IPlayerHandExt {
         const name = PLAYER_RANK.OnePair
         super(cards, name);
         this.restCards = cards
+    }
+
+    public greaterThan(data: IPlayerHandExt): boolean{
+        return PlayerHand.greaterThan(this as IPlayerHandExt, data)
     }
 
     public check() : IPlayerHandExt | null {
@@ -26,7 +30,8 @@ export class OnePair extends PlayerHand implements IPlayerHandExt {
                 pairIndexs.push(i)
                 pairIndexs.push(foundDuplicateRankIndex)
                 this.rank = cardRanks[i]
-                this.suit = this.cards[i].suit
+                this.suit = RANK_SUITS.indexOf(this.cards[i].suit) > RANK_SUITS.indexOf(this.cards[foundDuplicateRankIndex].suit)
+                    ? this.cards[i].suit : this.cards[foundDuplicateRankIndex].suit
                 i = cardRanks.length
                 result = true
                 this.restCards = this.cards.filter((card, index) => !pairIndexs.includes(index))
@@ -38,9 +43,5 @@ export class OnePair extends PlayerHand implements IPlayerHandExt {
 
     public solve() : IPlayerHandExt | null {
         return this.check()
-        // const checkingStepResults: (IPlayerHandExt | null)[] = []
-        // checkingStepResults[0] = this.check()
-
-        // return checkingStepResults
     }
 }

@@ -12,6 +12,9 @@ class FourOfAKind extends PlayerHand_1.PlayerHand {
         this.suit = '';
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     solve(checkingStepResultsBefore) {
         const threeOfAKindCheck = checkingStepResultsBefore || new ThreeOfAKind_1.ThreeOfAKind(this.cards).check();
         if (threeOfAKindCheck) {

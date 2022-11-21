@@ -13,6 +13,10 @@ export class Flush extends PlayerHand implements IPlayerHandExt {
         this.restCards = cards
     }
 
+    public greaterThan(data: IPlayerHandExt): boolean{
+        return PlayerHand.greaterThan(this as IPlayerHandExt, data)
+    }
+
     public check(): IPlayerHandExt | null {
         let result = false
         const suit = this.cards[0].suit

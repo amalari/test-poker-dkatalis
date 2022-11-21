@@ -10,4 +10,7 @@ export class Card {
         this.suit = arrStringCard[1];
         this.value = this.rank === 'Ace' ? [0, RANKS.indexOf(this.rank)] : RANKS.indexOf(this.rank);
     }
+    public toString(): string {
+        return `${this.rank} ${this.suit}`
+    }
 }

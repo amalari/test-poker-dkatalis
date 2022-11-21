@@ -1,4 +1,4 @@
-import { RANKS, SUITS } from "../../constants";
+import { PLAYER_RANK, RANKS, SUITS } from "../../constants";
 import { Card } from "../../models";
 import { arrayShuffle } from "../../utils";
 import { FourOfAKind, FullHouse, HighCard, IPlayerHandExt, StraightFlush, ThreeOfAKind, TwoPair } from "../player-hand";
@@ -11,6 +11,8 @@ export class Game {
     public numberofPlayerCard = 5
     public cardPool: Card[] = []
     public playerHandRanks: Player[] = []
+    public sortedPlayerHandRanks: Player[] = []
+    public winner: Player | null = null
     
     constructor(public numberOfPlayer: number){
         const arrSuits = Object.keys(SUITS)
@@ -51,6 +53,35 @@ export class Game {
         return new HighCard(cards).solve() as IPlayerHandExt
     }
 
+    private findTheWinner(): void {
+        this.sortedPlayerHandRanks = [...this.playerHandRanks].sort((playerHandRankA, playerHandRankB) => {
+            return playerHandRankB.playerRank.greaterThan(playerHandRankA.playerRank) ? 1 : -1
+        })
+        this.winner = this.sortedPlayerHandRanks[0]
+    }
+
+    private announceWinner(): void {
+        for (let i = 0; i < this.playerHandRanks.length; i++) {
+            const player = this.playerHandRanks[i]
+            const playerCard = player.playerRank.cards.map((card) => card.toString())
+            if(player.playerRank.name === PLAYER_RANK.HighCard){
+                console.log(`${player.name}: ${player.playerRank.name} with highest card ${player.playerRank.rank} ${player.playerRank.suit} (${playerCard})`)
+            } else {
+                console.log(`${player.name}: ${player.playerRank.name} (${playerCard})`)
+            }
+        }
+        const winner = this.sortedPlayerHandRanks[0]
+        const winnerCard = winner.playerRank.cards.map((card) => card.toString())
+        console.log('\n')
+        console.log("==== The Winner is =====", '\n')
+        if(winner.playerRank.name === PLAYER_RANK.HighCard){
+            console.log(`${winner.name}: ${winner.playerRank.name} with highest card ${winner.playerRank.rank} ${winner.playerRank.suit} (${winnerCard})`)
+        } else {
+            console.log(`${winner.name}: ${winner.playerRank.name} (${winnerCard})`)
+        }
+        console.log('\n')
+    }
+
     public play(): void {
         const shuffledCardPool = arrayShuffle(this.cardPool) as Card[]
         for (let i = 1; i <= this.numberOfPlayer; i++) {
@@ -64,6 +95,7 @@ export class Game {
                 playerRank
             })
         }
-        console.log(this.playerHandRanks)
+        this.findTheWinner()
+        this.announceWinner()
     }
 }

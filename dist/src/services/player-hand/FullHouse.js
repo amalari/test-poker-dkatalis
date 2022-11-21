@@ -14,6 +14,9 @@ class FullHouse extends PlayerHand_1.PlayerHand {
         this.suit = '';
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     solve(checkingStepResultsBefore) {
         var _a, _b, _c;
         const checkingStepResults = [];

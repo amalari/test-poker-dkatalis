@@ -11,6 +11,9 @@ class HighCard extends PlayerHand_1.PlayerHand {
         this.suit = '';
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     solve() {
         const sortedCards = this.cards
             .sort((cardA, cardB) => {

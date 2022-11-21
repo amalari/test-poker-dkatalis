@@ -13,6 +13,10 @@ export class HighCard extends PlayerHand implements IPlayerHandExt {
         this.restCards = cards
     }
 
+    public greaterThan(data: IPlayerHandExt): boolean{
+        return PlayerHand.greaterThan(this as IPlayerHandExt, data)
+    }
+
     public solve() : IPlayerHandExt | null {
         const sortedCards = this.cards
             .sort((cardA, cardB) => {

@@ -11,6 +11,9 @@ class Straight extends PlayerHand_1.PlayerHand {
         this.suit = '';
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     check() {
         let result = true;
         let aceCard = null;

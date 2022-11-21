@@ -16,6 +16,10 @@ export class FullHouse extends PlayerHand implements IPlayerHandExt {
         this.restCards = cards
     }
 
+    public greaterThan(data: IPlayerHandExt): boolean{
+        return PlayerHand.greaterThan(this as IPlayerHandExt, data)
+    }
+
     public solve(checkingStepResultsBefore?: IPlayerHandExt) : IPlayerHandExt | null {
         const checkingStepResults: (IPlayerHandExt | null)[] = []
         let cards = this.cards

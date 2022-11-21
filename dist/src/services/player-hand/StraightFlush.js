@@ -14,6 +14,9 @@ class StraightFlush extends PlayerHand_1.PlayerHand {
         this.rank = '';
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     solve() {
         var _a, _b, _c, _d;
         const checkingStepResults = [];
@@ -34,7 +37,6 @@ class StraightFlush extends PlayerHand_1.PlayerHand {
         if (!checkingStepResults.includes(null))
             return this;
         return checkingStepResults[0] || checkingStepResults[1];
-        // return checkingStepResults
     }
 }
 exports.StraightFlush = StraightFlush;

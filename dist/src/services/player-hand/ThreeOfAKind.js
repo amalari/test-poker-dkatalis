@@ -12,6 +12,9 @@ class ThreeOfAKind extends PlayerHand_1.PlayerHand {
         this.cardValueMappers = {};
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     check() {
         let result = false;
         const cardValueMappers = {};
@@ -48,9 +51,6 @@ class ThreeOfAKind extends PlayerHand_1.PlayerHand {
     }
     solve() {
         return this.check();
-        // const checkingStepResults: (IPlayerHandExt | null)[] = []
-        // checkingStepResults[0] = this.check()
-        // return checkingStepResults
     }
 }
 exports.ThreeOfAKind = ThreeOfAKind;

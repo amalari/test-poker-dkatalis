@@ -11,6 +11,8 @@ class Game {
         this.numberofPlayerCard = 5;
         this.cardPool = [];
         this.playerHandRanks = [];
+        this.sortedPlayerHandRanks = [];
+        this.winner = null;
         const arrSuits = Object.keys(constants_1.SUITS);
         for (let i = 0; i < constants_1.RANKS.length; i++) {
             const rank = constants_1.RANKS[i];
@@ -46,6 +48,35 @@ class Game {
             return twoOrOnePair;
         return new player_hand_1.HighCard(cards).solve();
     }
+    findTheWinner() {
+        this.sortedPlayerHandRanks = [...this.playerHandRanks].sort((playerHandRankA, playerHandRankB) => {
+            return playerHandRankB.playerRank.greaterThan(playerHandRankA.playerRank) ? 1 : -1;
+        });
+        this.winner = this.sortedPlayerHandRanks[0];
+    }
+    announceWinner() {
+        for (let i = 0; i < this.playerHandRanks.length; i++) {
+            const player = this.playerHandRanks[i];
+            const playerCard = player.playerRank.cards.map((card) => card.toString());
+            if (player.playerRank.name === constants_1.PLAYER_RANK.HighCard) {
+                console.log(`${player.name}: ${player.playerRank.name} with highest card ${player.playerRank.rank} ${player.playerRank.suit} (${playerCard})`);
+            }
+            else {
+                console.log(`${player.name}: ${player.playerRank.name} (${playerCard})`);
+            }
+        }
+        const winner = this.sortedPlayerHandRanks[0];
+        const winnerCard = winner.playerRank.cards.map((card) => card.toString());
+        console.log('\n');
+        console.log("==== The Winner is =====", '\n');
+        if (winner.playerRank.name === constants_1.PLAYER_RANK.HighCard) {
+            console.log(`${winner.name}: ${winner.playerRank.name} with highest card ${winner.playerRank.rank} ${winner.playerRank.suit} (${winnerCard})`);
+        }
+        else {
+            console.log(`${winner.name}: ${winner.playerRank.name} (${winnerCard})`);
+        }
+        console.log('\n');
+    }
     play() {
         const shuffledCardPool = (0, utils_1.arrayShuffle)(this.cardPool);
         for (let i = 1; i <= this.numberOfPlayer; i++) {
@@ -59,7 +90,8 @@ class Game {
                 playerRank
             });
         }
-        console.log(this.playerHandRanks);
+        this.findTheWinner();
+        this.announceWinner();
     }
 }
 exports.Game = Game;

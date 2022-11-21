@@ -12,6 +12,9 @@ class Flush extends PlayerHand_1.PlayerHand {
         this.rank = '';
         this.restCards = cards;
     }
+    greaterThan(data) {
+        return PlayerHand_1.PlayerHand.greaterThan(this, data);
+    }
     check() {
         let result = false;
         const suit = this.cards[0].suit;

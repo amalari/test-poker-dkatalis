@@ -9,5 +9,8 @@ class Card {
         this.suit = arrStringCard[1];
         this.value = this.rank === 'Ace' ? [0, constants_1.RANKS.indexOf(this.rank)] : constants_1.RANKS.indexOf(this.rank);
     }
+    toString() {
+        return `${this.rank} ${this.suit}`;
+    }
 }
 exports.Card = Card;
