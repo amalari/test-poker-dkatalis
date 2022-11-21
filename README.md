@@ -34,17 +34,17 @@ This project is intended to be used with the latest Active LTS release of [Node.
 npm i
 ```
 
-## How to test
+## How to run it properly
 ```sh
+# run the testing first
 npm run test
-```
 
-## How to run
-```sh
+# build code
+npm run build
+
+# start the apps
 npm run start {number of player}
-```
-example
-```sh
+# example:
 npm run start 5
 ```
 
