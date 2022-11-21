@@ -23,11 +23,11 @@ This project is intended to be used with the latest Active LTS release of [Node.
 
 - `clean` - remove coverage data, Jest cache and transpiled files,
 - `build` - transpile TypeScript to ES6,
-- `start` - start application,
 - `build:watch` - interactive watch mode to automatically transpile source files,
 - `lint` - lint source files and tests,
 - `prettier-format` - reformat files,
 - `test` - run tests,
+- `start` - start application,
 
 ## Install
 ```sh
