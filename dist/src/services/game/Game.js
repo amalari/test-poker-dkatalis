@@ -23,7 +23,7 @@ class Game {
         }
     }
     validate() {
-        return (this.cardPool.length / this.numberOfPlayer) >= 5 ? true : false;
+        return (this.cardPool.length / this.numberOfPlayer) >= 5 && this.numberOfPlayer > 1 ? true : false;
     }
     getPlayerHandRank(cards) {
         // straightFlush have 4 possibilities: Straight Flush, Flush, Straight and null if doesn't match

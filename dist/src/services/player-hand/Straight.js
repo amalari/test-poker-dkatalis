@@ -38,26 +38,21 @@ class Straight extends PlayerHand_1.PlayerHand {
                 i = sortedCards.length;
             }
         }
-        if (result && aceCard) {
-            result = false;
-            if (sortedCards[sortedCards.length - 1].value === 3) {
-                this.rank = sortedCards[sortedCards.length - 1].rank;
-                this.suit = sortedCards[sortedCards.length - 1].suit;
-                result = true;
-            }
+        if (!result)
+            return null;
+        this.rank = sortedCards[sortedCards.length - 1].rank;
+        this.suit = sortedCards[sortedCards.length - 1].suit;
+        if (aceCard) {
             if (sortedCards[sortedCards.length - 1].value === 11) {
                 this.rank = aceCard.rank;
                 this.suit = aceCard.suit;
                 result = true;
             }
         }
-        return result ? this : null;
+        return this;
     }
     solve() {
         return this.check();
-        // const checkingStepResults: (IPlayerHandExt | null)[] = []
-        // checkingStepResults[0] = this.check()
-        // return checkingStepResults
     }
 }
 exports.Straight = Straight;

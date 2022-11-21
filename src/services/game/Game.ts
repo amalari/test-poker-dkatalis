@@ -26,7 +26,7 @@ export class Game {
     }
 
     public validate(): boolean {
-        return (this.cardPool.length / this.numberOfPlayer) >= 5 ? true : false
+        return (this.cardPool.length / this.numberOfPlayer) >= 5 && this.numberOfPlayer > 1 ? true : false
     }
 
     private getPlayerHandRank(cards: Card[]): IPlayerHandExt {

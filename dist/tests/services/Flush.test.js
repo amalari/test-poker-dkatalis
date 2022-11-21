@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../../src/constants");
 const models_1 = require("../../src/models");
 const player_hand_1 = require("../../src/services/player-hand");
-describe('Flush', () => {
+describe('test functional of class Flush', () => {
     it('shoud return a Flush', () => {
         const playerHand = new player_hand_1.Flush([
             new models_1.Card(`6 ${constants_1.SUITS.Clubs}`),
@@ -13,7 +13,56 @@ describe('Flush', () => {
             new models_1.Card(`Ace ${constants_1.SUITS.Clubs}`),
         ]);
         const result = playerHand.solve();
-        expect(result === null || result === void 0 ? void 0 : result.name).toBe('Flush');
+        expect(result === null || result === void 0 ? void 0 : result.name).toBe(constants_1.PLAYER_RANK.Flush);
+    });
+    it('shoud return true cause first result greater than second result', () => {
+        const playerHand = new player_hand_1.Flush([
+            new models_1.Card(`6 ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`10 ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`Jack ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`King ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`Ace ${constants_1.SUITS.Clubs}`),
+        ]);
+        const result = playerHand.solve();
+        const comparePlayerHand = new player_hand_1.Flush([
+            new models_1.Card(`6 ${constants_1.SUITS.Diamonds}`),
+            new models_1.Card(`10 ${constants_1.SUITS.Diamonds}`),
+            new models_1.Card(`Jack ${constants_1.SUITS.Diamonds}`),
+            new models_1.Card(`King ${constants_1.SUITS.Diamonds}`),
+            new models_1.Card(`Ace ${constants_1.SUITS.Diamonds}`),
+        ]);
+        const compareResult = comparePlayerHand.solve();
+        expect(result === null || result === void 0 ? void 0 : result.greaterThan(compareResult)).toBe(true);
+    });
+    it('shoud return false cause first result less than second result', () => {
+        const playerHand = new player_hand_1.Flush([
+            new models_1.Card(`6 ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`10 ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`Jack ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`King ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`Ace ${constants_1.SUITS.Clubs}`),
+        ]);
+        const result = playerHand.solve();
+        const comparePlayerHand = new player_hand_1.Flush([
+            new models_1.Card(`6 ${constants_1.SUITS.Spades}`),
+            new models_1.Card(`10 ${constants_1.SUITS.Spades}`),
+            new models_1.Card(`Jack ${constants_1.SUITS.Spades}`),
+            new models_1.Card(`King ${constants_1.SUITS.Spades}`),
+            new models_1.Card(`Ace ${constants_1.SUITS.Spades}`),
+        ]);
+        const compareResult = comparePlayerHand.solve();
+        expect(result === null || result === void 0 ? void 0 : result.greaterThan(compareResult)).toBe(false);
+    });
+    it('shoud return a Flush', () => {
+        const playerHand = new player_hand_1.Flush([
+            new models_1.Card(`6 ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`10 ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`Jack ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`King ${constants_1.SUITS.Clubs}`),
+            new models_1.Card(`Ace ${constants_1.SUITS.Clubs}`),
+        ]);
+        const result = playerHand.solve();
+        expect(result === null || result === void 0 ? void 0 : result.name).toBe(constants_1.PLAYER_RANK.Flush);
     });
     it('shoud return null does not matched any suit flush', () => {
         const playerHand = new player_hand_1.Flush([
