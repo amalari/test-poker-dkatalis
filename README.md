@@ -49,7 +49,7 @@ npm run start 5
 ```
 
 [ts-badge]: https://img.shields.io/badge/TypeScript-4.8-blue.svg
-[nodejs-badge]: https://img.shields.io/badge/Node.js->=%2016.13-blue.svg
+[nodejs-badge]: https://img.shields.io/badge/Node.js->=%2018.11-blue.svg
 [nodejs]: https://nodejs.org/dist/latest-v18.x/docs/api/
 [typescript]: https://www.typescriptlang.org/
 [typescript-4-9]: https://devblogs.microsoft.com/typescript/announcing-typescript-4-9/
