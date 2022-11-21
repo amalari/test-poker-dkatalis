@@ -1,42 +1,24 @@
-import { Card } from "../../models/Card";
-// import { Flush } from "./Flush";
-// type IPlayerHandExtension = typeof Flush | typeof Straight | typeof ThreeOfAKind | typeof FourOfAKind | typeof OnePair | typeof HighCard
-
-export interface IPlayerHand {
-    cards: Card[]
-    name: string
-    check: () => IPlayerHandExt | null
-}
-
-export interface IPlayerHandExt extends IPlayerHand {
-    restCards: Card[]
-    // highestCard?: Card | null
-    rank?: string
-    suit?: string
-    isFourKind?: () => boolean
-    solve: (checkingStepResultsBefore?: IPlayerHandExt) => IPlayerHandExt | null
-}
-export class PlayerHand implements IPlayerHand {
-    public cards: Card[]
-    public name: string
-    constructor(cards: string[] | Card[], name: string) {
-        this.name = name
-        this.cards = typeof cards[0] === "string" ? (cards as string[]).map((card: string) => new Card(card)) : cards as Card[]
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PlayerHand = void 0;
+const Card_1 = require("../../models/Card");
+class PlayerHand {
+    constructor(cards, name) {
+        this.name = name;
+        this.cards = typeof cards[0] === "string" ? cards.map((card) => new Card_1.Card(card)) : cards;
     }
-    public check(): IPlayerHandExt | null {
-        return null
+    check() {
+        return null;
     }
 }
-
+exports.PlayerHand = PlayerHand;
 // export class Flush extends PlayerHand implements IPlayerHandExt {
 //     public restCards: Card[] = []
-
 //     constructor(cards: Card[]) {
 //         const name = 'Flush'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public check(): IPlayerHandExt | null {
 //         let result = false
 //         const suit = this.cards[0].suit
@@ -50,29 +32,23 @@ export class PlayerHand implements IPlayerHand {
 //                 result = true
 //             }
 //         }
-
 //         return result ? this : null
 //     }
-
 //     public solve() : IPlayerHandExt | null {
 //         return this.check()
 //         // const checkingStepResults: (IPlayerHandExt | null)[] = []
 //         // checkingStepResults[0] = this.check()
-
 //         // return checkingStepResults
 //     }
 // }
-
 // export class Straight extends PlayerHand implements IPlayerHandExt {
 //     public highestCard: Card | null = null
 //     public restCards: Card[]
-
 //     constructor(cards: Card[]) {
 //         const name = 'Straight'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public check(): IPlayerHandExt | null {
 //         let result = true
 //         let aceCard : Card | null = null
@@ -87,9 +63,7 @@ export class PlayerHand implements IPlayerHand {
 //             .sort((cardA, cardB) => {
 //                 return (cardA.value as number) - (cardB.value as number)
 //             })
-
 //         if(sortedCards.length < 4) return null
-
 //         for (let i = 0; i < sortedCards.length - 1; i++) {
 //             const cardValue = sortedCards[i].value as number;
 //             const nextCardValue = sortedCards[i+1].value as number;
@@ -98,7 +72,6 @@ export class PlayerHand implements IPlayerHand {
 //                 i = sortedCards.length
 //             }
 //         }
-
 //         if(result && aceCard){
 //             result = false
 //             if(sortedCards[sortedCards.length - 1].value === 3){
@@ -112,26 +85,21 @@ export class PlayerHand implements IPlayerHand {
 //         }
 //         return result ? (this as IPlayerHandExt) : null
 //     }
-
 //     public solve() : IPlayerHandExt | null {
 //         return this.check()
 //         // const checkingStepResults: (IPlayerHandExt | null)[] = []
 //         // checkingStepResults[0] = this.check()
-
 //         // return checkingStepResults
 //     }
 // }
-
 // export class StraightFlush extends PlayerHand implements IPlayerHandExt {
 //     private steps = [Flush, Straight]
 //     public restCards: Card[]
-
 //     constructor(cards: Card[]) {
 //         const name = 'Straight Flush'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public solve() : IPlayerHandExt | null {
 //         const checkingStepResults: (IPlayerHandExt | null)[] = []
 //         for (let i = 0; i < this.steps.length; i++) {
@@ -143,23 +111,19 @@ export class PlayerHand implements IPlayerHand {
 //             }
 //         }
 //         if(!checkingStepResults.includes(null)) return (this as StraightFlush)
-
 //         return checkingStepResults[0] || checkingStepResults[1]
 //         // return checkingStepResults
 //     }
 // }
-
 // export class ThreeOfAKind extends PlayerHand implements IPlayerHandExt {
 //     public rank = ''
 //     public restCards: Card[]
-
 //     private cardValueMappers: {[key: string]: number} = {}
 //     constructor(cards: Card[]) {
 //         const name = 'Three of a Kind'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public check() : IPlayerHandExt | null {
 //         let result = false
 //         const cardValueMappers: {[key: string]: number} = {}
@@ -170,7 +134,6 @@ export class PlayerHand implements IPlayerHand {
 //                 if(cardValueMappers[card.rank] === 3){
 //                     result = true
 //                     this.rank = card.rank
-                    
 //                     let duplicateRankCounter = 0
 //                     this.restCards = this.cards.filter((restCard) => {
 //                         if(restCard.rank === card.rank) duplicateRankCounter++
@@ -182,10 +145,8 @@ export class PlayerHand implements IPlayerHand {
 //             }
 //         }
 //         this.cardValueMappers = cardValueMappers
-
 //         return result ? (this as IPlayerHandExt) : null
 //     }
-
 //     public isFourKind() : boolean {
 //         let highestKindCount = 0
 //         for (const key in this.cardValueMappers) {
@@ -194,26 +155,21 @@ export class PlayerHand implements IPlayerHand {
 //         }
 //         return highestKindCount === 4
 //     }
-
 //     public solve() : IPlayerHandExt | null {
 //         return this.check()
 //         // const checkingStepResults: (IPlayerHandExt | null)[] = []
 //         // checkingStepResults[0] = this.check()
-
 //         // return checkingStepResults
 //     }
 // }
-
 // export class FourOfAKind extends PlayerHand implements IPlayerHandExt {
 //     public rank = ''
 //     public restCards: Card[]
-
 //     constructor(cards: Card[]) {
 //         const name = 'Four of a Kind'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public solve(checkingStepResultsBefore?: IPlayerHandExt) : IPlayerHandExt | null {
 //         const threeOfAKindCheck = checkingStepResultsBefore || new ThreeOfAKind(this.cards).check()
 //         if(threeOfAKindCheck){
@@ -227,39 +183,32 @@ export class PlayerHand implements IPlayerHand {
 //         }
 //         return null
 //     }
-
 //     // public solve(checkingStepResultsBefore?: IPlayerHandExt) : IPlayerHandExt | null {
 //     //     return this.check()
 //     //     // const checkingStepResults: (IPlayerHandExt | null)[] = []
 //     //     // checkingStepResults[0] = this.check()
-
 //     //     // return checkingStepResults
 //     // }
 // }
-
 // export class FullHouse extends PlayerHand implements IPlayerHandExt {
 //     private steps : (typeof ThreeOfAKind | typeof OnePair | null)[] = [ThreeOfAKind, OnePair]
 //     public rank = ''
 //     public restCards: Card[]
-
 //     constructor(cards: Card[]) {
 //         const name = 'Full House'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public solve(checkingStepResultsBefore?: IPlayerHandExt) : IPlayerHandExt | null {
 //         const checkingStepResults: (IPlayerHandExt | null)[] = []
 //         let cards = this.cards
 //         const restSteps = this.steps
-
 //         if(checkingStepResultsBefore){
 //             const foundIndex = restSteps.findIndex((step) => checkingStepResultsBefore.constructor.name === step?.name)
 //             checkingStepResults[foundIndex] = checkingStepResultsBefore
 //             restSteps[foundIndex] = null
 //             cards = checkingStepResultsBefore.restCards
 //         }
-
 //         for (let i = 0; i < restSteps.length; i++) {
 //             const step = this.steps[i]
 //             if(step !== null){
@@ -270,21 +219,17 @@ export class PlayerHand implements IPlayerHand {
 //             }
 //         }
 //         if(!checkingStepResults.includes(null)) return (this as FullHouse)
-
 //         return checkingStepResults[0] || checkingStepResults[1]
 //     }
 // }
-
 // export class OnePair extends PlayerHand implements IPlayerHandExt {
 //     public restCards: Card[]
 //     public rank = ''
-
 //     constructor(cards: Card[]) {
 //         const name = 'One Pair'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public check() : IPlayerHandExt | null {
 //         let result = false
 //         const pairIndexs: number[] = []
@@ -293,7 +238,6 @@ export class PlayerHand implements IPlayerHand {
 //             const duplicateCardRanks = [...cardRanks]
 //             duplicateCardRanks[i] = 'null'
 //             const foundDuplicateRankIndex = duplicateCardRanks.indexOf(cardRanks[i])
-
 //             if(foundDuplicateRankIndex > -1){
 //                 pairIndexs.push(i)
 //                 pairIndexs.push(foundDuplicateRankIndex)
@@ -303,42 +247,34 @@ export class PlayerHand implements IPlayerHand {
 //                 this.restCards = this.cards.filter((card, index) => !pairIndexs.includes(index))
 //             }
 //         }
-
 //         return result ? (this as unknown as IPlayerHandExt) : null
 //     }
-
 //     public solve() : IPlayerHandExt | null {
 //         return this.check()
 //         // const checkingStepResults: (IPlayerHandExt | null)[] = []
 //         // checkingStepResults[0] = this.check()
-
 //         // return checkingStepResults
 //     }
 // }
-
 // export class TwoPair extends PlayerHand implements IPlayerHandExt {
 //     private steps = [OnePair, OnePair]
 //     public rank = ''
 //     public restCards: Card[]
-
 //     constructor(cards: Card[]) {
 //         const name = 'Two Pair'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public solve(checkingStepResultsBefore?: IPlayerHandExt) : IPlayerHandExt | null {
 //         const checkingStepResults: (IPlayerHandExt | null)[] = []
 //         let cards = this.cards
 //         const restSteps = this.steps
-
 //         if(checkingStepResultsBefore){
 //             const foundIndex = restSteps.findIndex((step) => checkingStepResultsBefore.constructor.name === step.name)
 //             checkingStepResults[foundIndex] = checkingStepResultsBefore
 //             restSteps.slice(foundIndex, 1)
 //             cards = checkingStepResultsBefore.restCards
 //         }
-
 //         for (let i = 0; i < this.steps.length; i++) {
 //             const step = this.steps[i]
 //             const checkOnePair = new step(cards).check()
@@ -348,24 +284,18 @@ export class PlayerHand implements IPlayerHand {
 //             }
 //         }
 //         if(!checkingStepResults.includes(null)) return (this as TwoPair)
-
 //         return checkingStepResults[0] || checkingStepResults[1]
-
-
 //         // return checkingStepResults
 //     }
 // }
-
 // export class HighCard extends PlayerHand implements IPlayerHandExt {
 //     public rank = ''
 //     public restCards: Card[]
-
 //     constructor(cards: Card[]) {
 //         const name = 'High Card'
 //         super(cards, name);
 //         this.restCards = cards
 //     }
-
 //     public solve() : IPlayerHandExt | null {
 //         const sortedCards = this.cards
 //             .sort((cardA, cardB) => {
@@ -373,7 +303,6 @@ export class PlayerHand implements IPlayerHand {
 //                 const cardBValue = Array.isArray(cardB.value) ? cardB.value[1] : cardB.value
 //                 return cardAValue - cardBValue
 //             })
-        
 //         this.rank = sortedCards[sortedCards.length - 1].rank
 //         return this
 //     }

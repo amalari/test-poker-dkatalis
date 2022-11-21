@@ -2,9 +2,10 @@
   "name": "test-poker-dkatalis_achmad",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/main.js",
+  "main": "dist/src/main.js",
   "scripts": {
-    "start": "node dist/main.js",
+    "start": "node dist/src/main.js",
+    "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -w -p tsconfig.json",
     "lint": "eslint . --ext .ts",
